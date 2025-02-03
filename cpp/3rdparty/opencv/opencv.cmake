@@ -52,12 +52,13 @@ set(BUILD_opencv_video OFF CACHE BOOL "Build OpenCV video module")
 set(BUILD_opencv_videoio OFF CACHE BOOL "Build OpenCV video IO module")
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "CMake build type")
 
-message(STATUS "Fetching OpenCV from Github")
-include(FetchContent)
-FetchContent_Declare(opencv GIT_REPOSITORY https://github.com/opencv/opencv.git GIT_TAG 4.x
-                     GIT_SHALLOW TRUE GIT_PROGRESS TRUE)
-FetchContent_MakeAvailable(opencv)
+# include(FetchContent)
+# FetchContent_Declare(opencv GIT_REPOSITORY https://github.com/opencv/opencv.git GIT_TAG 4.x
+#                      GIT_SHALLOW TRUE GIT_PROGRESS TRUE)
+# FetchContent_MakeAvailable(opencv)
 # OpenCV_INCLUDE_DIRS is set by OpenCVConfig.cmake and is unavailable after simply building
+find_package(OpenCV REQUIRED)
+message(STATUS "Using OpenCV ${OpenCV_VERSION}")
 set(OpenCV_INCLUDE_DIRS "${opencv_SOURCE_DIR}/include")
 
 add_library(OpenCV INTERFACE)
